@@ -1,0 +1,33 @@
+jv_blog_home:
+    path:      /{page}
+    defaults:
+        _controller: JVBlogBundle:Article:index
+        page:        1
+    requirements:
+        page: \d*
+
+jv_blog_view:
+    path:      /article/{id}
+    defaults:
+        _controller: JVBlogBundle:Article:view
+    requirements:
+        id: \d+
+
+jv_blog_add:
+    path:      /add
+    defaults:
+        _controller: JVBlogBundle:Article:add
+
+jv_blog_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: JVBlogBundle:Article:edit
+    requirements:
+        id: \d+
+
+jv_blog_delete:
+    path:      /delete/{id}
+    defaults:
+        _controller: JVBlogBundle:Article:delete
+    requirements:
+        id: \d+

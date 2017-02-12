@@ -1,0 +1,23 @@
+{% extends "JVBlogBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un article - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h2>Modifier un article</h2>
+
+  {{ include("JVBlogBundle:Article:form.html.twig") }}
+
+  <p>
+    Vous éditez une annonce déjà existante.
+  </p>
+
+  <p>
+    <a href="{{ path('jv_blog_view', {'id': article.id}) }}" class="btn btn-default">
+      Retour à l'article
+    </a>
+  </p>
+
+{% endblock %}

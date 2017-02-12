@@ -1,0 +1,14 @@
+{% extends "JVBlogBundle::layout.html.twig" %}
+
+{% block body %}
+
+  <h2>Ajouter un article</h2>
+
+  {{ include("JVBlogBundle:Article:form.html.twig") }}
+
+  <p>
+    Attention : cette article sera ajouté directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}
