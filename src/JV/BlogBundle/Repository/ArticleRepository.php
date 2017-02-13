@@ -23,8 +23,6 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
   public function getArticles($page, $nbPerPage)
   {
     $query = $this->createQueryBuilder('a')
-      ->leftJoin('a.image', 'i')
-      ->addSelect('i')
       ->leftJoin('a.categories', 'c')
       ->addSelect('c')
       ->orderBy('a.date', 'DESC')

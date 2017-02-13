@@ -13,9 +13,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class ArticleController extends Controller
 {
+
+  /**
+   * @Route("/{page}", requirements={"page" = "\d*"}, defaults={"page" = 1})
+   */
   public function indexAction($page)
   {
     if ($page < 1) {
@@ -24,10 +29,10 @@ class ArticleController extends Controller
 
     $nbPerPage = 5;
 
-    $listAdverts = $this->getDoctrine()
+    $listArticles = $this->getDoctrine()
       ->getManager()
       ->getRepository('JVBlogBundle:Article')
-      ->getAdverts($page, $nbPerPage)
+      ->getArticles($page, $nbPerPage)
     ;
 
     $nbPages = ceil(count($listArticles) / $nbPerPage);
@@ -43,6 +48,9 @@ class ArticleController extends Controller
     ));
   }
 
+  /**
+   * @Route("/article/{id}", requirements={"id" = "\d+"}, defaults={"id" = 1})
+   */
   public function viewAction(Article $article)
   {
     $em = $this->getDoctrine()->getManager();
@@ -65,6 +73,7 @@ class ArticleController extends Controller
   }
 
   /**
+   * @Route("/article/add")
    * @Security("has_role('ROLE_AUTEUR')")
    */
   public function addAction(Request $request)
@@ -94,6 +103,9 @@ class ArticleController extends Controller
     ));
   }
 
+  /**
+   * @Route("/article/edit/{id}", requirements={"id" = "\d+"})
+   */
   public function editAction(Article $article, Request $request)
   {
     $form = $this->get('form.factory')->create(AdvertEditType::class, $article);
@@ -113,6 +125,9 @@ class ArticleController extends Controller
     ));
   }
 
+  /**
+   * @Route("/article/delete/{id}", requirements={"id" = "\d+"})
+   */
   public function deleteAction(Article $article, Request $request)
   {
     $em = $this->getDoctrine()->getManager();

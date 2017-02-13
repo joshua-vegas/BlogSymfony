@@ -1,5 +1,6 @@
 jv_blog:
-    resource: "@JVBlogBundle/Resources/config/routing.yml"
+    resource: "@JVBlogBundle/Controller"
+    type:     annotation
     prefix:   /blog
 
 
